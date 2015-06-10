@@ -7,9 +7,9 @@
 2.Open Web.config and replace with your value:
 * `LayerProviderId` - Provider ID found in the Layer Dashboard under "Authentication"
 * `LayerKeyId` - Public key generated and stored in the Layer Dashboard under "Authentication"
+* `LayerPemFilePath` - Path of .pem file contain RSA Private key
 
-3.Paste your RSA private key into `/App_Data/layer-key.pem`
-
+3.Remember to paste your RSA key into .pem file located at `LayerPemFilePath` on `web.config`
 
 4.Run project by hit F5
 
