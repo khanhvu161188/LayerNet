@@ -62,7 +62,7 @@ namespace SampleIdentityTokenLayer.Controllers
             var exp = (int)issueTime.AddMinutes(60).Subtract(utc0).TotalSeconds;//expired time in second
             var jwtHeader = new JwtHeader
             {
-                {"typ", "JWS"},
+                {"typ", "JWT"},
                 {"alg", "RS256"},
                 {"cty", "layer-eit;v=1"},
                 {"kid", LayerKeyId} //String - Layer Key ID used to sign the token. This is your actual Key ID
@@ -86,12 +86,7 @@ namespace SampleIdentityTokenLayer.Controllers
 
             try
             {
-                var path = HttpContext.Current.Request.IsLocal ?
-                    //use local host
-                    HttpContext.Current.Server.MapPath("~//App_Data//layer-key.pem") :
-                    //use azure server
-                    Environment.GetEnvironmentVariable("HOME").ToString() + "\\site\\wwwroot\\App_Data\\layer-key.pem";
-
+                var path = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["LayerPemFilePath"]);
                 //use BouncyCastle for load RSA private key
                 var sr = new StreamReader(path);
                 var pr = new PemReader(sr);
