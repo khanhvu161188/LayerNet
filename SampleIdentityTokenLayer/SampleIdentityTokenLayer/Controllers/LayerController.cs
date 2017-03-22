@@ -57,7 +57,7 @@ namespace SampleIdentityTokenLayer.Controllers
         public string GenerateIdentifyToken(string userid, string nonce)
         {
             var utc0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            var issueTime = DateTime.Now;
+            var issueTime = DateTime.UtcNow;
             var iat = (int)issueTime.Subtract(utc0).TotalSeconds;//issues time in second
             var exp = (int)issueTime.AddMinutes(60).Subtract(utc0).TotalSeconds;//expired time in second
             var jwtHeader = new JwtHeader
